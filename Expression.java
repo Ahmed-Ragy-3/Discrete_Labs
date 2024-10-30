@@ -1,4 +1,3 @@
-package Discrete_Labs;
 
 public class Expression implements IExpression {
 

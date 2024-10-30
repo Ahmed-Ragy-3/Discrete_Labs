@@ -1,11 +1,8 @@
-package Discrete_Labs;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
 
-import Discrete_Labs.Expression;
 
 public class LogicalExpression {
    public static final char NOT = '~';
@@ -105,13 +102,13 @@ public class LogicalExpression {
          } else if(c == '(') {
             stack.push(c);
 
-         }else if (c == ')') {
+         } else if (c == ')') {
 
             if(stack.isEmpty()) {
                throwError();
             }
 
-            while (stack.peek() != '(') {
+            while(stack.peek() != '(') {
                if(stack.isEmpty()) {
                   throwError();
                }

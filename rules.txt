@@ -1,0 +1,10 @@
+Modus Ponens
+P > Q , P : Q
+Modus tollens
+P > Q , ~Q : ~P
+Hypothetical syllogism
+P > Q , Q > R : P > R
+Disjunctive syllogism
+P v Q , ~P : Q
+Resolution
+P v Q , ~P v R : Q v R

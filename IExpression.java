@@ -1,4 +1,3 @@
-package Discrete_Labs;
 
 interface IExpression {
    String getRepresentation();
