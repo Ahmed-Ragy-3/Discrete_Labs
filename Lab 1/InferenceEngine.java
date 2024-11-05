@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -6,7 +7,7 @@ import java.util.Scanner;
 
 public class InferenceEngine implements IInferenceEngine {
 
-   private List<ExpressionClass> expressions;
+   private List<Expression> expressions;
    private List<InferenceRule> rules;
 
    private InferenceRule targetRule;
@@ -16,10 +17,12 @@ public class InferenceEngine implements IInferenceEngine {
       rules = new ArrayList<>();
    }
    
-   public void addExpression(ExpressionClass exp) {
+   @Override
+   public void addExpression(Expression exp) {
       expressions.add(exp);
    }
 
+   @Override
    public void addRule(InferenceRule rule) {
       rules.add(rule);
       // System.out.println("%s %s %s %s"
@@ -27,7 +30,8 @@ public class InferenceEngine implements IInferenceEngine {
       // rule.getExp2(), rule.getInference()));
    }
 
-   public ExpressionClass applyRules() {
+   @Override
+   public Expression applyRules() {
       for (InferenceRule rule : rules) {
          if (rule.matches(expressions.get(0), expressions.get(1))) {
             targetRule = rule;
@@ -59,7 +63,7 @@ public class InferenceEngine implements IInferenceEngine {
       engine.addExpression(new ExpressionClass(input.nextLine()));
       engine.addExpression(new ExpressionClass(input.nextLine()));
       
-      ExpressionClass infered = engine.applyRules();
+      ExpressionClass infered = (ExpressionClass)engine.applyRules();
       
       if(infered == null) {
          System.out.println("The input expression cannot be inferred");

@@ -1,3 +1,4 @@
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,13 +91,13 @@ public class InferenceRule implements IInferenceRule {
    }
 
    @Override
-   public boolean matches(ExpressionClass exp1, ExpressionClass exp2) {
+   public boolean matches(Expression exp1, Expression exp2) {
       return matches(exp1.getRepresentation(), exp2.getRepresentation()) || 
              matches(exp2.getRepresentation(), exp1.getRepresentation());
    }
 
    @Override
-   public ExpressionClass apply(ExpressionClass exp1, ExpressionClass exp2) {
+   public Expression apply(Expression exp1, Expression exp2) {
       String inf = new String(inference);
 
       for(char c : map.keySet()) {
@@ -108,14 +109,6 @@ public class InferenceRule implements IInferenceRule {
 
    public static char[] getDefaultsymbols() {
       return defaultSymbols;
-   }
-
-   public Map<Character, Character> getMap() {
-      return map;
-   }
-
-   public void setMap(Map<Character, Character> map) {
-      this.map = map;
    }
 
    public String getName() {
