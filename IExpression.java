@@ -1,9 +1,9 @@
 
-interface IExpression {
+interface Expression {
    String getRepresentation();
    void setRepresentation(String representation);
 }
 
 interface LogicalExpressionSolver {
-   boolean evaluateExpression(IExpression expression); 
+   boolean evaluateExpression(Expression expression); 
 }

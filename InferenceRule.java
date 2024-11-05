@@ -34,7 +34,6 @@ public class InferenceRule implements IInferenceRule {
       }
       i++;
       this.expression2 = strb.toString();
-
       this.inference = str.substring(i, str.length());
 
       // System.out.println("%s %s %s %s"
@@ -42,7 +41,7 @@ public class InferenceRule implements IInferenceRule {
       // this.expression2, this.inference));
    }
 
-   public InferenceRule(String name, Expression exp1, Expression exp2, Expression inference) {
+   public InferenceRule(String name, ExpressionClass exp1, ExpressionClass exp2, ExpressionClass inference) {
       this.name = name;
       this.expression1 = exp1.getRepresentation();
       this.expression2 = exp2.getRepresentation();
@@ -83,28 +82,28 @@ public class InferenceRule implements IInferenceRule {
       // System.out.println(this.expression1.replaceAll(" ", "") + " - rule - " +
       // this.expression2.replaceAll(" ", ""));
        
-      //  System.out.println(exp1 + " - " + exp2);
-      //  System.out.println("------------------------------------------------------------------------");
+      // System.out.println(exp1 + " - " + exp2);
+      // System.out.println("--------------------------------------");
 
       return exp1.compareTo(this.expression1.replaceAll(" ", "")) == 0 && 
              exp2.compareTo(this.expression2.replaceAll(" ", "")) == 0;
    }
-   
+
    @Override
-   public boolean matches(Expression exp1, Expression exp2) {
+   public boolean matches(ExpressionClass exp1, ExpressionClass exp2) {
       return matches(exp1.getRepresentation(), exp2.getRepresentation()) || 
              matches(exp2.getRepresentation(), exp1.getRepresentation());
    }
 
    @Override
-   public Expression apply(Expression exp1, Expression exp2) {
+   public ExpressionClass apply(ExpressionClass exp1, ExpressionClass exp2) {
       String inf = new String(inference);
 
       for(char c : map.keySet()) {
          inf = inf.replaceAll(Character.toString(c), Character.toString(map.get(c)));
       }
 
-      return (matches(exp1, exp2) ? new Expression(inf) : null);
+      return (matches(exp1, exp2) ? new ExpressionClass(inf) : null);
    }
 
    public static char[] getDefaultsymbols() {

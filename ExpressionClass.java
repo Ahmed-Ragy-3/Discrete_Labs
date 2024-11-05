@@ -1,9 +1,9 @@
 
-public class Expression implements IExpression {
+public class ExpressionClass implements Expression {
 
    private String expression;
 
-   public Expression(String expression) {
+   public ExpressionClass(String expression) {
       this.expression = expression;
    }
 

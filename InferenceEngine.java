@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class InferenceEngine /*implements IInferenceEngine*/ {
+public class InferenceEngine implements IInferenceEngine {
 
-   private List<Expression> expressions;
+   private List<ExpressionClass> expressions;
    private List<InferenceRule> rules;
 
    private InferenceRule targetRule;
@@ -16,7 +16,7 @@ public class InferenceEngine /*implements IInferenceEngine*/ {
       rules = new ArrayList<>();
    }
    
-   public void addExpression(Expression exp) {
+   public void addExpression(ExpressionClass exp) {
       expressions.add(exp);
    }
 
@@ -27,7 +27,7 @@ public class InferenceEngine /*implements IInferenceEngine*/ {
       // rule.getExp2(), rule.getInference()));
    }
 
-   public Expression applyRules() {
+   public ExpressionClass applyRules() {
       for (InferenceRule rule : rules) {
          if (rule.matches(expressions.get(0), expressions.get(1))) {
             targetRule = rule;
@@ -47,7 +47,6 @@ public class InferenceEngine /*implements IInferenceEngine*/ {
          while (input.hasNextLine()) {
             String line = input.nextLine();
             String line2 = input.nextLine();
-            // System.out.println(line + " ----- " + line2);
             engine.addRule(new InferenceRule(line, line2));
         }
 
@@ -57,10 +56,10 @@ public class InferenceEngine /*implements IInferenceEngine*/ {
 
       input = new Scanner(System.in);
 
-      engine.addExpression(new Expression(input.nextLine()));
-      engine.addExpression(new Expression(input.nextLine()));
+      engine.addExpression(new ExpressionClass(input.nextLine()));
+      engine.addExpression(new ExpressionClass(input.nextLine()));
       
-      Expression infered = engine.applyRules();
+      ExpressionClass infered = engine.applyRules();
       
       if(infered == null) {
          System.out.println("The input expression cannot be inferred");

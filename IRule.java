@@ -1,10 +1,10 @@
 interface IInferenceRule {
-   boolean matches(Expression exp1, Expression exp2);
-   Expression apply(Expression exp1, Expression exp2);
+   boolean matches(ExpressionClass exp1, ExpressionClass exp2);
+   ExpressionClass apply(ExpressionClass exp1, ExpressionClass exp2);
 }
 
 interface IInferenceEngine {
    void addRule(InferenceRule rule);
-   void addExpression(Expression exp);
-   java.beans.Expression applyRules();
+   void addExpression(ExpressionClass exp);
+   ExpressionClass applyRules();
 }

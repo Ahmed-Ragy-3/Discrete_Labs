@@ -4,8 +4,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 
-public class LogicalExpression {
-   public static final char NOT = '~';
+public class LogicalExpression implements LogicalExpressionSolver {
 
    private static Map<Character, Boolean> map = new HashMap<>();
 
@@ -31,7 +30,6 @@ public class LogicalExpression {
       expression = expression.replaceAll("\\^",".");
       expression = expression.replaceAll("v", "+");
 
-
       return expression;
    }
    
@@ -49,7 +47,7 @@ public class LogicalExpression {
          if(invalid(expressionChars[i])) {
             throwError();
 
-         }else if(isOperator(expressionChars[i]) && isOperator(expressionChars[i + 1]) && expressionChars[i + 1] != NOT) {
+         }else if(isOperator(expressionChars[i]) && isOperator(expressionChars[i + 1]) && expressionChars[i + 1] != '~') {
             // P ~ + Q
             throwError();
          }else if(isOperand(expressionChars[i]) && isOperand(expressionChars[i + 1])) {
@@ -93,10 +91,8 @@ public class LogicalExpression {
 
          } else if(isOperator(c)) {
             while(!stack.isEmpty() && precedence(c) < precedence(stack.peek())) {
-               // هفضي
                postfix.append(stack.pop());
             }
-            // h7t el operator el gdeed
             stack.push(c);
 
          } else if(c == '(') {
@@ -128,7 +124,13 @@ public class LogicalExpression {
       return postfix.toString();
    }
 
-   public static boolean evaluateExpression(IExpression expression) {
+   @Override
+   public boolean evaluateExpression(Expression expression) {
+
+      expression.setRepresentation(normalize(expression.getRepresentation()));
+      validate(expression.getRepresentation());
+      expression.setRepresentation(toPostfix(expression.getRepresentation()));
+
       Scanner input = new Scanner(System.in);
       Stack<Boolean> stack = new Stack<>();
       
@@ -170,15 +172,11 @@ public class LogicalExpression {
 
    public static void main(String[] args) {
       Scanner input = new Scanner(System.in);
-      Expression expression = new Expression(input.nextLine());
+      LogicalExpression logic = new LogicalExpression();
 
       try {
-         expression.setRepresentation(LogicalExpression.normalize(expression.getRepresentation()));
-         LogicalExpression.validate(expression.getRepresentation());
 
-         expression.setRepresentation(LogicalExpression.toPostfix(expression.getRepresentation()));
-
-         boolean b = LogicalExpression.evaluateExpression(expression);
+         boolean b = logic.evaluateExpression(new ExpressionClass(input.nextLine()));
          System.out.println(b);
 
       } catch (Exception e) {
