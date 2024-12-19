@@ -10,7 +10,7 @@ public class Main {
     //-------------------------------------------------------
 
 
-    public static boolean primceChecker(int n){
+    public static boolean primeChecker(int n){
         if(n<2) return false;
 
         boolean[] isComposite = new boolean[n+1];
@@ -40,7 +40,7 @@ public class Main {
         }
 
         for (int i = 3; i * i <= n; i += 2) {
-            while (n % 3 == 0) {
+            while (n % i == 0) {
                 factors.put(i, factors.getOrDefault(i, 0) + 1);
                 n /= i;
             }
@@ -110,23 +110,23 @@ public class Main {
     }
 
 
+    //-------------------------------------------------------
 
 
 
     public static void main(String[] args) {
 
-        System.out.println(gcd(72,120));
-        System.out.println(lcm(72,120));
+        int x = 121;
+        int y = 242;
 
-        System.out.println(gcdPrime(72,120));
-        System.out.println(lcmPrime(72,120));
+        System.out.println("GCD = " + gcd(x,y));
+        System.out.println("LCM = " + lcm(x,y));
+        System.out.println("Prime Factors = " + primeFactors(x));
+        System.out.println("Prime Factors = " + primeFactors(y));
+        System.out.println("GCD Prime = " + gcdPrime(x,y));
+        System.out.println("LCM Prime = " + lcmPrime(x,y));
 
-        System.out.println(primceChecker(7));
-
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-
-//img.display();
+        System.out.print(primeChecker((24)));
 
     }
 }
